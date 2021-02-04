@@ -40,10 +40,10 @@ class Control(Tk):
 
     def stream_start(self):
         if self.label_index < 4:
-            for client in self.clients:
+            for i, client in enumerate(self.clients):
                 if not client.is_started:
                     loc = self.location[self.location_index]
-                    self.index = get_index()
+                    self.index = get_index(i+2)
                     path = f'{CACHE_PATH}/{loc}'
                     client.init(path)
                 client.label = self.label[self.label_index]
