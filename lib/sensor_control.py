@@ -1,5 +1,8 @@
 from lib.paho_mqtt import PahoMqtt
+from lib.params import SAVE_PATH
+from shutil import rmtree, move
 import csv
+import os
 
 
 class Sensor(PahoMqtt):
@@ -11,11 +14,19 @@ class Sensor(PahoMqtt):
 
         # Flags
         self.is_streaming = False
+        self.is_started = False
+        self.sensor_ready = False
 
         # Attributes
         self.label = None
+        self.counter = 0
+        self.counter_temp = 0
+        self.death_counter = 0
 
     def _on_message(self, client, userdata, message):
+        self.counter += 1
+        if self.counter > 10000:
+            self.counter = 0
         if self.is_streaming:
             msg = message.payload.decode("utf-8", "ignore")
             msg = msg.replace("[", "")
@@ -28,12 +39,32 @@ class Sensor(PahoMqtt):
             else:
                 self._writer.writerow([msg, 0])
 
-    def stream_init(self, path):
-        self._file = open(f'{path}/sensor_{self.info}.csv', "w+", newline='')
+    def init(self, path):
+        self.path = f'{path}/sensor_{self.info}.csv'
+        self._file = open(self.path, "w+", newline='')
         self._writer = csv.writer(self._file)
-        self.is_streaming = True
         self.is_started = True
+        self.is_streaming = True
 
-    def stream_stop(self):
+    def stop(self):
         self.is_streaming = False
+
+    def save(self, path):
         self.is_started = False
+        try:
+            paths = self.path.split('/')
+            new_path = f'{SAVE_PATH}/{paths[1]}'
+            move(self.path, new_path)
+        except Exception as e:
+            print(str(e), 'in sensor_control.save')
+
+    def reset(self):
+        if not self.is_streaming and self.is_started:
+            self.is_started = False
+            try:
+                os.remove(self.path)
+            except Exception as e:
+                print(str(e), 'in sensor_control.reset')
+            return True
+        else:
+            return False

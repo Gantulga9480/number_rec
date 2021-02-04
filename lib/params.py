@@ -16,6 +16,8 @@ SENSORS = [["sensors/sensor1/data", 1, 1],
            ["sensors/sensor9/data", 9, 1],
            ["sensors/sensor10/data", 10, 1]]
 
+LOCATION_LIST = ['2', '3', '4', '5', '6', '7', '8']
+LABEL_LIST = ['south', 'west', 'north', 'east']
 # Command list
 START = 'start'
 STOP = 'stop'
@@ -32,3 +34,8 @@ SAMPLERATE = 48000
 DOWNSAMPLE = 4
 
 SOUND_BUFFER_MAX_CAPACITY = 300_000
+
+SENSOR_ERROR = "Sensor is not ready, check"
+
+CACHE_PATH = r'cache'
+SAVE_PATH = r'data'
