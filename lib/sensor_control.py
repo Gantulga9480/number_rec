@@ -67,7 +67,6 @@ class Sensor(PahoMqtt):
 
     def reset(self):
         if not self.is_streaming and self.is_started:
-            self.is_started = False
             try:
                 os.remove(self.path)
             except Exception as e:

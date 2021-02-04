@@ -49,8 +49,7 @@ class Control(Tk):
                 client.label = self.label[self.label_index]
             self.label_index += 1
         else:
-            for client in self.clients:
-                client.stop()
+            self.stream_stop()
             self.stream_save()
         self.update_label()
 
@@ -60,8 +59,8 @@ class Control(Tk):
             client.stop()
             client.reset()
         self.update_label()
-        self.init_btn['state'] = NORMAL
-        self.start_btn['state'] = DISABLED
+        self.init_btn['state'] = DISABLED
+        self.start_btn['state'] = NORMAL
         self.reset_btn['state'] = DISABLED
 
     def stream_stop(self):
@@ -75,10 +74,11 @@ class Control(Tk):
     def stream_save(self):
         for client in self.clients:
             client.save(self.index)
+        self.label_index = 0
         self.location_index += 1
         if self.location_index == 9:
             self.location_index = 0
-        self.label_index = 0
+            messagebox.showinfo('Recorder', 'Done')
 
     def result(self):
         pass
