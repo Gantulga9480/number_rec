@@ -19,14 +19,14 @@ class Sensor(PahoMqtt):
 
         # Attributes
         self.label = None
-        self.counter = 0
+        self.counter = 1
         self.counter_temp = 0
         self.death_counter = 0
 
     def _on_message(self, client, userdata, message):
         self.counter += 1
         if self.counter > 10000:
-            self.counter = 0
+            self.counter = 1
         if self.is_streaming:
             msg = message.payload.decode("utf-8", "ignore")
             msg = msg.replace("[", "")
@@ -48,6 +48,9 @@ class Sensor(PahoMqtt):
 
     def stop(self):
         self.is_streaming = False
+
+    def start(self):
+        self.is_streaming = True
 
     def save(self):
         self.is_started = False

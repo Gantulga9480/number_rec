@@ -31,6 +31,7 @@ class GUI(Tk):
         if sen_count == len(self.clients):
             self.start_btn['state'] = NORMAL
             self.reset_btn['state'] = NORMAL
+            self.init_btn['state'] = DISABLED
             print('SENSORS READY')
         else:
             self.reset_btn['state'] = DISABLED
@@ -60,10 +61,19 @@ class GUI(Tk):
         self.start_btn['state'] = DISABLED
         self.reset_btn['state'] = DISABLED
 
+    def stream_stop(self):
+        for client in self.clients:
+            client.stop()
+
+    def stream_resume(self):
+        for client in self.clients:
+            client.start()
+
     def stream_save(self):
         for client in self.clients:
             client.save()
         self.location_index += 1
+        self.label_index = 0
 
     def result(self):
         pass
@@ -148,23 +158,34 @@ class GUI(Tk):
                                       + f' - {self.label[self.label_index]}',
                                       background='white',
                                       font=("default", 10, 'bold'))
-        self.current_location.grid(row=0, column=0, padx=2, pady=2)
+        self.current_location.grid(row=0, column=0, padx=2, pady=2,
+                                   columnspan=2)
         self.init_btn = ttk.Button(self.sensor_frame2, text="Stream init",
                                    command=self.stream_init,
                                    width=11)
-        self.init_btn.grid(row=1, column=0, padx=2, pady=2)
+        self.init_btn.grid(row=1, column=0, padx=2, pady=2, columnspan=2)
+        self.resume_btn = ttk.Button(self.sensor_frame2, text="Stream stop",
+                                     command=self.stream_resume,
+                                     width=11)
+        self.resume_btn['state'] = DISABLED
+        self.resume_btn.grid(row=2, column=0, padx=2, pady=2)
+        self.stop_btn = ttk.Button(self.sensor_frame2, text="Stream stop",
+                                   command=self.stream_stop,
+                                   width=11)
+        self.stop_btn['state'] = DISABLED
+        self.stop_btn.grid(row=2, column=1, padx=2, pady=2)
         self.start_btn = ttk.Button(self.sensor_frame2,
                                     text=f"{self.label[self.label_index]}",
                                     command=self.stream_start,
                                     width=11)
         self.start_btn['state'] = DISABLED
-        self.start_btn.grid(row=2, column=0, padx=2, pady=2)
+        self.start_btn.grid(row=3, column=0, padx=2, pady=2)
         self.reset_btn = ttk.Button(self.sensor_frame2,
                                     text='RESET',
                                     command=self.stream_reset,
                                     width=11)
         self.reset_btn['state'] = DISABLED
-        self.reset_btn.grid(row=2, column=1, padx=2, pady=2)
+        self.reset_btn.grid(row=3, column=1, padx=2, pady=2)
 
 
 GUI()

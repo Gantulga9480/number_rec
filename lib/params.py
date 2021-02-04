@@ -17,7 +17,8 @@ SENSORS = [["sensors/sensor1/data", 1, 1],
            ["sensors/sensor10/data", 10, 1]]
 
 LOCATION_LIST = ['2', '3', '4', '5', '6', '7', '8']
-LABEL_LIST = ['south', 'west', 'north', 'east']
+LABEL_LIST = ['South', 'West', 'North', 'East']
+
 # Command list
 START = 'start'
 STOP = 'stop'
