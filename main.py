@@ -139,7 +139,9 @@ class GUI(Tk):
         self.sensor_frame2.pack(side=LEFT, fill="y")
         self.current_location = Label(self.sensor_frame2,
                                       text=f'{self.location[self.location_index]}'
-                                      + f' - {self.label[self.label_index]}')
+                                      + f' - {self.label[self.label_index]}',
+                                      background='white',
+                                      font=("default", 10, 'bold'))
         self.current_location.grid(row=0, column=0, padx=2, pady=2)
         self.init_btn = ttk.Button(self.sensor_frame2, text="Stream init",
                                    command=self.stream_init,
@@ -155,8 +157,8 @@ class GUI(Tk):
                                     text=f"{self.label[self.label_index]}",
                                     command=self.stream_reset,
                                     width=11)
-        self.stop_btn['state'] = DISABLED
-        self.stop_btn.grid(row=2, column=1, padx=2, pady=2)
+        self.reset_btn['state'] = DISABLED
+        self.reset_btn.grid(row=2, column=1, padx=2, pady=2)
 
 
 GUI()
