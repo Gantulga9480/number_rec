@@ -12,8 +12,8 @@ SENSORS = [["sensors/sensor1/data", 1, 1],
            ["sensors/sensor5/data", 5, 1],
            ["sensors/sensor6/data", 6, 1],
            ["sensors/sensor7/data", 7, 1],
-           ["sensors/sensor8/data", 8, 1],
-           ["sensors/sensor9/data", 9, 1],
+           ["sensors/sensor8/data", 8, 0],
+           ["sensors/sensor9/data", 9, 0],
            ["sensors/sensor10/data", 10, 1]]
 
 LOCATION_LIST = ['2', '3', '4', '5', '6', '7', '8']

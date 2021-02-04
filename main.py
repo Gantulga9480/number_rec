@@ -30,6 +30,9 @@ class GUI(Tk):
                                            f"{SENSOR_ERROR}-{i+1}")
         if sen_count == len(self.clients):
             self.start_btn['state'] = NORMAL
+            print('SENSORS READY')
+        else:
+            self.start_btn['state'] = DISABLED
 
     def stream_start(self):
         if self.label_index < 4:
@@ -152,7 +155,7 @@ class GUI(Tk):
         self.start_btn['state'] = DISABLED
         self.start_btn.grid(row=2, column=0, padx=2, pady=2)
         self.reset_btn = ttk.Button(self.sensor_frame2,
-                                    text=f"{self.label[self.label_index]}",
+                                    text='RESET',
                                     command=self.stream_reset,
                                     width=11)
         self.reset_btn['state'] = DISABLED
