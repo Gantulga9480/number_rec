@@ -52,11 +52,12 @@ class Sensor(PahoMqtt):
     def start(self):
         self.is_streaming = True
 
-    def save(self):
+    def save(self, index):
         self.is_started = False
         try:
             paths = self.path.split('/')
-            new_path = f'{SAVE_PATH}/{paths[1]}/{paths[2]}'
+            os.mkdir(f'{SAVE_PATH}/{paths[1]}/{index})')
+            new_path = f'{SAVE_PATH}/{paths[1]}/{index}'
             move(self.path, new_path)
         except Exception as e:
             print(str(e), 'in sensor_control.save')

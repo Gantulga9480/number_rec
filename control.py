@@ -43,8 +43,8 @@ class Control(Tk):
             for client in self.clients:
                 if not client.is_started:
                     loc = self.location[self.location_index]
-                    index = get_index()
-                    path = f'{CACHE_PATH}/{loc}/{index}'
+                    self.index = get_index()
+                    path = f'{CACHE_PATH}/{loc}'
                     client.init(path)
                 client.label = self.label[self.label_index]
             self.label_index += 1
@@ -74,7 +74,7 @@ class Control(Tk):
 
     def stream_save(self):
         for client in self.clients:
-            client.save()
+            client.save(self.index)
         self.location_index += 1
         if self.location_index == 9:
             self.location_index = 0
