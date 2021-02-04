@@ -19,7 +19,7 @@ def sound_main():
             with stream:
                 while mic.is_streaming:
                     time.sleep(1)
-                    print(f'[INFO] {mic.info} is recording : {mic.buffer.shape[0]}')
+                    print(f'[INFO] {mic.info} is recording')
             print(f'{mic.info} record end')
         elif mic.is_idle:
             while mic.is_idle:

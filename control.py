@@ -41,7 +41,7 @@ class Control(Tk):
 
     def stream_start(self):
         if self.label_index < 4:
-            loc = self.location[self.location_index]
+            loc = self.location[self.los_ind]
             label = self.label[self.label_index]
             for client in self.clients:
                 if not client.is_started:
@@ -82,9 +82,9 @@ class Control(Tk):
         for client in self.clients:
             client.save(self.index)
         self.label_index = 0
-        self.location_index += 1
-        if self.location_index == 7:
-            self.location_index = 0
+        self.los_ind += 1
+        if self.los_ind == 7:
+            self.los_ind = 0
             messagebox.showinfo('Recorder', 'Done')
             self.index += 1
 
@@ -92,8 +92,8 @@ class Control(Tk):
         pass
 
     def update_label(self):
-        if self.label_index < 4 and self.location_index < 7:
-            loc = self.location[self.location_index]
+        if self.label_index < 4 and self.los_ind < 7:
+            loc = self.location[self.los_ind]
             lbl = self.label[self.label_index].capitalize()
             st = f'{loc}' + f' - {lbl}'
             self.current_location['text'] = st
@@ -139,7 +139,7 @@ class Control(Tk):
         self.sound_client = PahoMqtt(BROKER, "SOUND", c_msg="sound")
         self.sound_client.loop_start()
         self.location = LOCATION_LIST
-        self.location_index = 0
+        self.los_ind = 0
         self.label = LABEL_LIST
         self.label_index = 0
         self.index = get_index()
@@ -172,13 +172,15 @@ class Control(Tk):
         self.sensor_frame2 = LabelFrame(self, text="Data control",
                                         background='white')
         self.sensor_frame2.pack(side=LEFT, fill="y")
+        self.current_index = Label(self.sensor_frame2,
+                                   text=f'Attendy: {self.index}')
+        self.current_index.grid(row=0, column=0, padx=2, pady=2)
         self.current_location = Label(self.sensor_frame2,
-                                      text=f'{self.location[self.location_index]}'
+                                      text=f'{self.location[self.los_ind]}'
                                       + f' - {self.label[self.label_index]}',
                                       background='white',
                                       font=("default", 10, 'bold'))
-        self.current_location.grid(row=0, column=0, padx=2, pady=2,
-                                   columnspan=2)
+        self.current_location.grid(row=0, column=1, padx=2, pady=2)
         self.init_btn = ttk.Button(self.sensor_frame2, text="Stream init",
                                    command=self.stream_init,
                                    width=11)

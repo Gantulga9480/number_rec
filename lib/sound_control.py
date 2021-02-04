@@ -104,7 +104,7 @@ class Sound(PahoMqtt):
         label_file = open(f'{self.path}/label_time.txt', '+w')
         with label_file:
             for item in self.label:
-                label_file.write(f'{item[0]}, {item[1]}\n')
+                label_file.write(f'{item[0]},{item[1]}\n')
         print('[INFO] DONE SAVING DATA ...')
 
     def callback(self, indata, frames, times, status):
