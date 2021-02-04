@@ -64,8 +64,8 @@ class GUI(Tk):
         pass
 
     def update_label(self):
-        self.current_location['text'] = f'{self.location[self.location_index]}' + f' - {self.label[self.label_index]}'
         if self.label_index < 4:
+            self.current_location['text'] = f'{self.location[self.location_index]}' + f' - {self.label[self.label_index]}'
             self.start_btn['text'] = f'{self.label[self.label_index]}'
         else:
             self.start_btn['text'] = 'SAVE'
