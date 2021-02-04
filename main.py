@@ -30,8 +30,10 @@ class GUI(Tk):
                                            f"{SENSOR_ERROR}-{i+1}")
         if sen_count == len(self.clients):
             self.start_btn['state'] = NORMAL
+            self.reset_btn['state'] = NORMAL
             print('SENSORS READY')
         else:
+            self.reset_btn['state'] = DISABLED
             self.start_btn['state'] = DISABLED
 
     def stream_start(self):
