@@ -56,7 +56,7 @@ class Sensor(PahoMqtt):
         self.is_started = False
         try:
             paths = self.path.split('/')
-            new_path = f'{SAVE_PATH}/{paths[1]}'
+            new_path = f'{SAVE_PATH}/{paths[1]}/{paths[2]}'
             move(self.path, new_path)
         except Exception as e:
             print(str(e), 'in sensor_control.save')

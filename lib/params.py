@@ -40,3 +40,7 @@ SENSOR_ERROR = "Sensor is not ready, check"
 
 CACHE_PATH = r'cache'
 SAVE_PATH = r'data'
+
+TIME_FORMAT = "%H_%M_%S"
+DATE_FORMAT = "%Y_%m_%d"
+DATE_TIME = "%Y_%m_%d_%H_%M_%S"
