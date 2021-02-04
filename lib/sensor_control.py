@@ -4,7 +4,8 @@ import csv
 
 class Sensor(PahoMqtt):
 
-    def __init__(self, broker, info, port, raw_msg, c_msg, d_msg):
+    def __init__(self, broker, info, port=1883, raw_msg=False,
+                 c_msg='', d_msg=''):
         super().__init__(broker, info, port=port, raw_msg=raw_msg,
                          c_msg=c_msg, d_msg=d_msg)
 
