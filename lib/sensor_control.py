@@ -54,13 +54,13 @@ class Sensor(PahoMqtt):
 
     def save(self, index):
         self.is_started = False
+        paths = self.path.split('/')
         try:
-            paths = self.path.split('/')
-            try:
-                os.mkdir(f'{SAVE_PATH}/{paths[1]}/{index})')
-            except FileExistsError:
-                pass
-            new_path = f'{SAVE_PATH}/{paths[1]}/{index}'
+            os.mkdir(f'{SAVE_PATH}/{paths[1]}/{index}_num)')
+        except FileExistsError:
+            pass
+        new_path = f'{SAVE_PATH}/{paths[1]}/{index}_num'
+        try:
             move(self.path, new_path)
         except Exception as e:
             print(str(e), 'in sensor_control.save')
