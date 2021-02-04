@@ -56,6 +56,9 @@ class GUI(Tk):
             client.stop()
             client.reset()
         self.update_label()
+        self.init_btn['state'] = NORMAL
+        self.start_btn['state'] = DISABLED
+        self.reset_btn['state'] = DISABLED
 
     def stream_save(self):
         for client in self.clients:

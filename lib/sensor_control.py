@@ -49,7 +49,7 @@ class Sensor(PahoMqtt):
     def stop(self):
         self.is_streaming = False
 
-    def save(self, path):
+    def save(self):
         self.is_started = False
         try:
             paths = self.path.split('/')
