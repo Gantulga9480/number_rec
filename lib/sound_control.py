@@ -95,8 +95,10 @@ class Sound(PahoMqtt):
                 i += 1
             except FileNotFoundError:
                 break
-        ss = self.path.split('/')
-        os.makedirs(self.path)
+        try:
+            os.makedirs(self.path)
+        except FileExistsError:
+            pass
         np.save(f'{self.path}/sound_{self.info}.npy', self.data)
         label_file = open(f'{self.path}/label_time.txt', '+w')
         with label_file:
