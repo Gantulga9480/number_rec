@@ -9,7 +9,7 @@ def sound_main():
         time.sleep(1)
 
 
-Control()
 sound = threading.Thread(target=sound_main)
 sound.start()
+Control()
 print('END')
