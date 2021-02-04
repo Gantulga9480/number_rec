@@ -43,7 +43,6 @@ class Control(Tk):
             for i, client in enumerate(self.clients):
                 if not client.is_started:
                     loc = self.location[self.location_index]
-                    self.index = get_index(i+2)
                     path = f'{CACHE_PATH}/{loc}'
                     client.init(path)
                 client.label = self.label[self.label_index]
@@ -129,6 +128,7 @@ class Control(Tk):
         self.location_index = 0
         self.label = LABEL_LIST
         self.label_index = 0
+        self.index = get_index()
         self.clients = list()
         dis = 0
         for i, item in enumerate(SENSORS):
