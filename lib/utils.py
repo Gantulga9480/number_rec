@@ -1,10 +1,10 @@
 import os
 
 
-def get_index(i):
+def get_index():
     index = 0
     while True:
-        if not os.path.isdir(f'data/{i}/{index}_num'):
+        if not os.path.isdir(f'data/2/{index}_num'):
             break
         else:
             index += 1
