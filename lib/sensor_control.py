@@ -56,7 +56,10 @@ class Sensor(PahoMqtt):
         self.is_started = False
         try:
             paths = self.path.split('/')
-            os.mkdir(f'{SAVE_PATH}/{paths[1]}/{index})')
+            try:
+                os.mkdir(f'{SAVE_PATH}/{paths[1]}/{index})')
+            except FileExistsError:
+                pass
             new_path = f'{SAVE_PATH}/{paths[1]}/{index}'
             move(self.path, new_path)
         except Exception as e:
