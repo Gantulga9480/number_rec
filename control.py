@@ -173,7 +173,7 @@ class Control(Tk):
                                         background='white')
         self.sensor_frame2.pack(side=LEFT, fill="y")
         self.current_index = Label(self.sensor_frame2,
-                                   text=f'Attendy: {self.index}',
+                                   text=f'Participant: {self.index}',
                                    background='white',
                                    font=("default", 10, 'bold'))
         self.current_index.grid(row=0, column=0, padx=2, pady=2)
