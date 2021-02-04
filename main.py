@@ -74,8 +74,6 @@ class GUI(Tk):
                 client.death_counter = 0
                 client.sensor_ready = True
                 self.sensor_state[index]["foreground"] = 'green'
-                if self.debug_mode.get():
-                    print(f'[INFO] SENSOR-{client.info} is working')
             else:
                 print(f'[WARNING] SENSOR-{client.info} is not responding')
                 client.death_counter += 1
