@@ -1,6 +1,6 @@
 from lib.paho_mqtt import PahoMqtt
 from lib.params import SAVE_PATH
-from shutil import rmtree, move
+from shutil import move
 import csv
 import os
 

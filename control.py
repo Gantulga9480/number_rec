@@ -1,6 +1,7 @@
 from tkinter import Label, LabelFrame, Tk, messagebox, ttk
 from tkinter.constants import DISABLED, LEFT, NORMAL
 from lib.sensor_control import Sensor
+from lib.paho_mqtt import PahoMqtt
 from lib.params import *
 from lib.utils import *
 import os
@@ -40,15 +41,21 @@ class Control(Tk):
 
     def stream_start(self):
         if self.label_index < 4:
-            for i, client in enumerate(self.clients):
+            loc = self.location[self.location_index]
+            label = self.label[self.label_index]
+            for client in self.clients:
                 if not client.is_started:
-                    loc = self.location[self.location_index]
                     path = f'{CACHE_PATH}/{loc}'
                     client.init(path)
-                client.label = self.label[self.label_index]
+                client.label = label
+            msg = f'{START}-{SAVE_PATH}/{loc}/{self.index}'
+            self.sound_client.publish('sound', msg)
+            msg = f'{ACTIVITIE_START}-{label}'
+            self.sound_client.publish('sound', msg)
             self.label_index += 1
         else:
-            self.stream_stop()
+            msg = f'{SAVE}-?'
+            self.sound_client.publish('sound', msg)
             self.stream_save()
         self.update_label()
 
@@ -71,21 +78,26 @@ class Control(Tk):
             client.start()
 
     def stream_save(self):
+        self.stream_stop()
         for client in self.clients:
             client.save(self.index)
         self.label_index = 0
         self.location_index += 1
-        if self.location_index == 9:
+        if self.location_index == 7:
             self.location_index = 0
             messagebox.showinfo('Recorder', 'Done')
+            self.index += 1
 
     def result(self):
         pass
 
     def update_label(self):
-        if self.label_index < 4 and self.location_index < 9:
-            self.current_location['text'] = f'{self.location[self.location_index]}' + f' - {self.label[self.label_index]}'
-            self.start_btn['text'] = f'{self.label[self.label_index]}'
+        if self.label_index < 4 and self.location_index < 7:
+            loc = self.location[self.location_index]
+            lbl = self.label[self.label_index].capitalize()
+            st = f'{loc}' + f' - {lbl}'
+            self.current_location['text'] = st
+            self.start_btn['text'] = f'{lbl}'
         else:
             self.start_btn['text'] = 'SAVE'
 
@@ -124,6 +136,8 @@ class Control(Tk):
             except FileExistsError:
                 pass
 
+        self.sound_client = PahoMqtt(BROKER, "SOUND", c_msg="sound")
+        self.sound_client.loop_start()
         self.location = LOCATION_LIST
         self.location_index = 0
         self.label = LABEL_LIST
