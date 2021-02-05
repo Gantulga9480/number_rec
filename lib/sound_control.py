@@ -86,6 +86,7 @@ class Sound(PahoMqtt):
         self.is_streaming = False
         self.is_playing = False
         self.is_idle = True
+        np.save(f'{CACHE_PATH}/data_{self.file_index}.npy', self.buffer)
         self.data = np.zeros((1, CHANNEL), dtype=np.float32)
         i = 0
         while True:
