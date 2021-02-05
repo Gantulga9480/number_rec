@@ -2,7 +2,7 @@
 # BROKER = "192.168.0.100"
 BROKER = "127.0.0.1"
 PORT = 1883
-NODE = 'mic_1'
+NODE = 'mic_5'
 
 # Topic list
 SENSORS = [["sensors/sensor1/data", 1, 1],
@@ -29,8 +29,8 @@ QUIT = 'quit'
 ACTIVITIE_START = 'a_start'
 ACTIVITIE_STOP = 'a_stop'
 
-DEVICE = 0
-CHANNEL = 1
+DEVICE = 7
+CHANNEL = 7
 SAMPLERATE = 48000
 DOWNSAMPLE = 4
 
@@ -39,7 +39,7 @@ SOUND_BUFFER_MAX_CAPACITY = 300_000
 SENSOR_ERROR = "Sensor is not ready, check"
 
 CACHE_PATH = r'cache'
-SAVE_PATH = r'data'
+SAVE_PATH = r'data/number'
 
 TIME_FORMAT = "%H_%M_%S"
 DATE_FORMAT = "%Y_%m_%d"

@@ -60,6 +60,8 @@ class Control(Tk):
         self.update_label()
 
     def stream_reset(self):
+        msg = f'{RESET}-?'
+        self.sound_client.publish('sound', msg)
         self.label_index = 0
         for client in self.clients:
             client.stop()
@@ -100,6 +102,7 @@ class Control(Tk):
             self.start_btn['text'] = f'{lbl}'
         else:
             self.start_btn['text'] = 'SAVE'
+        self.current_index['text'] = f'{self.index}'
 
     def set_state(self):
         for index, client in enumerate(self.clients):
