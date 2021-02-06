@@ -90,9 +90,6 @@ class Control(Tk):
             messagebox.showinfo('Recorder', 'Done')
             self.index += 1
 
-    def result(self):
-        pass
-
     def update_label(self):
         if self.label_index < 4 and self.los_ind < 7:
             loc = self.location[self.los_ind]
@@ -102,7 +99,7 @@ class Control(Tk):
             self.start_btn['text'] = f'{lbl}'
         else:
             self.start_btn['text'] = 'SAVE'
-        self.current_index['text'] = f'{self.index}'
+        self.current_index['text'] = f'Participant: {self.index}'
 
     def set_state(self):
         for index, client in enumerate(self.clients):
