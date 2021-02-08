@@ -54,8 +54,6 @@ class Control(Tk):
             self.sound_client.publish('sound', msg)
             self.label_index += 1
         else:
-            msg = f'{SAVE}-?'
-            self.sound_client.publish('sound', msg)
             self.stream_save()
         self.update_label()
 
@@ -81,6 +79,8 @@ class Control(Tk):
 
     def stream_save(self):
         self.stream_stop()
+        msg = f'{SAVE}-?'
+        self.sound_client.publish('sound', msg)
         for client in self.clients:
             client.save(self.index)
         self.label_index = 0
